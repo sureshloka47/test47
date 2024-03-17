@@ -18,6 +18,6 @@ jobs:
               core.setFailed('Please add at least one label to your pull request.');
             } else {
               labels.forEach(label => {
-                console.log(`Label "${label.name}" is present in the pull request.`);
+                console.log(`Label "${label.name}" is present in the pull request. `);
               });
             }
