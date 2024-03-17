@@ -13,7 +13,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const labels = context.payload.pull_request.labels.length;
-            if (labels === 0) {
+            const labels = context.payload.pull_request.labels;
+            if (labels.length === 0) {
               core.setFailed('Please add at least one label to your pull request.');
+            } else {
+              labels.forEach(label => {
+                console.log(`Label "${label.name}" is present in the pull request.`);
+              });
             }
