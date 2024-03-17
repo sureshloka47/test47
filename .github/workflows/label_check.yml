@@ -1,0 +1,19 @@
+name: Label Check
+
+on:
+  pull_request:
+    types: [opened, edited, labeled, unlabeled]
+
+jobs:
+  check-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR has labels
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labels = context.payload.pull_request.labels.length;
+            if (labels === 0) {
+              core.setFailed('Please add at least one label to your pull request.');
+            }
